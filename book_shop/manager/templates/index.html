@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BOOKSHOP</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+</head>
+<body>
+<h3>{{ user }}</h3>
+{% for b in context %}
+<h4>{{ b.title }}</h4>
+<h4> {{ b.description}} </h4>
+<h4>{{ b.date }}</h4>
+<h4> <i>{{ b.authors.all }}</i></h4>
+        <br><br>
+        {% for a in b.book_comment.all %}
+            <h3>{{ a.comment }}</h3>
+            <h3>{{ a.date }}</h3>
+            <h3>{{ a.author }} </h3>
+
+        {% endfor %}
+<br><br>
+
+{% endfor %}
+</body>
+</html>
