@@ -8,15 +8,18 @@
 <body>
 <h3>{{ user }}</h3>
 {% for b in context %}
-<h4>{{ b.title }}</h4>
+<h1>{{ b.title }}</h1>
 <h4> {{ b.description}} </h4>
-<h4>{{ b.date }}</h4>
+<h2>{{ b.date }}</h2>
 <h4> <i>{{ b.authors.all }}</i></h4>
+<a href="{% url 'add_like' id=b.id %}"><h3> likes: {{ b.likes }} </h3></a>
+
         <br><br>
         {% for a in b.book_comment.all %}
-            <h3>{{ a.comment }}</h3>
-            <h3>{{ a.date }}</h3>
-            <h3>{{ a.author }} </h3>
+            <h4>{{ a.comment }}</h4>
+            <h5>{{ a.date }}</h5>
+            <h6>{{ a.author }} </h6>
+            <a href="{% url 'comment_like' id=a.id %}"><h5>Likes: {{ a.likes }}</h5></a>
 
         {% endfor %}
 <br><br>
