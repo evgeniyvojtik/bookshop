@@ -1,14 +1,30 @@
+from django.db.models import Count, Prefetch, Avg
 from django.shortcuts import render, redirect
 from django.views import View
 
-from manager.models import Book, Comment, LikeBookUser, LikeCommentUser
+from manager.models import Book, Comment, LikeBookUser, LikeCommentUser, UsersRating
 
+
+# class MyPage(View):
+#
+#     def get(self, request):
+#         context = {}
+#         comment_query = Comment.objects.annotate(count_like=Count('users_like'))
+#         comments = Prefetch('comments', comment_query)
+#         books = Book.objects.prefetch_related("authors", comments)
+#         context['books'] = books.annotate(count_like=Count('users_like'), count_comment=Count('comments'))
+#         return render(request, 'index.html', context)
 
 class MyPage(View):
 
     def get(self, request):
-        context = Book.objects.all()
-        return render(request, 'index.html', {"context": context})
+        context = {}
+        comment_query = Comment.objects.annotate(count_like=Count('users_like'))
+        comments = Prefetch('comments', comment_query)
+        books = Book.objects.prefetch_related("authors", comments)
+        context['books'] = books
+        context['range'] = range(1, 6)
+        return render(request, 'index.html', context)
 
 
 class AddLike(View):
@@ -25,3 +41,8 @@ class AddCommentLike(View):
         return redirect('the-main-page')
 
 
+class AddRate(View):
+    def get(self, request, rate, id):
+        if request.user.is_authenticated:
+            UsersRating.objects.create(user=request.user, book_id=id, rate=rate)
+        return redirect('the-main-page')

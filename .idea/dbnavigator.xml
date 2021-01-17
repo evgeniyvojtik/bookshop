@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb">
-        <schema name="main" object-types="index, constraint, view, table, column, dataset trigger" />
+        <schema name="main" object-types="table, dataset trigger, constraint, index, column, view" />
       </connection>
     </loaded-nodes>
   </component>
@@ -41,6 +41,11 @@
     <connection id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" dataset="main.manager_likecommentuser" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" dataset="main.manager_usersrating" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" dataset="main.manager_likebookuser" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" dataset="main.sqlite_sequence" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" dataset="main.manager_comment" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" dataset="main.manager_book" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" dataset="main.manager_book_authors" active-filter-id="EMPTY_FILTER" />
   </component>

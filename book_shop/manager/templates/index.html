@@ -3,27 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>BOOKSHOP</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-DhY6onE6f3zzKbjUPRc2hOzGAdEf4/Dz+WJwBvEYL/lkkIsI3ihufq9hk9K4lVoK" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style> .checked {color: orange;} </style>
 </head>
 <body>
-<h3>{{ user }}</h3>
-{% for b in context %}
-<h1>{{ b.title }}</h1>
-<h4> {{ b.description}} </h4>
-<h2>{{ b.date }}</h2>
-<h4> <i>{{ b.authors.all }}</i></h4>
-<a href="{% url 'add_like' id=b.id %}"><h3> likes: {{ b.likes }} </h3></a>
+<div class="container">
+    <h3>{{ user }}</h3>
+    {% for b in books %}
 
-        <br><br>
-        {% for a in b.book_comment.all %}
-            <h4>{{ a.comment }}</h4>
-            <h5>{{ a.date }}</h5>
-            <h6>{{ a.author }} </h6>
-            <a href="{% url 'comment_like' id=a.id %}"><h5>Likes: {{ a.likes }}</h5></a>
+    <h1>{{ b.title }}</h1>
+    <h4> {{ b.description}} </h4>
+    <h2>{{ b.date }}</h2>
+    <h4> authors: </h4>
+    {% for i in b.authors.all %}
+    <h4><i> {{ i }}</i></h4>
+    {% endfor %}
+    <a href="{% url 'add_like' id=b.id %}"><h3> likes: {{ b.likes }} </h3></a>
+    {% for i in range %}
+        {% if b.rate >= i %}
+        <a href="{% url 'add_rating' id=b.id rate=i %}">
+        <span class="fa fa-star checked"></span>
+        </a>
+        {% else %}
+        <a href="{% url 'add_rating' id=b.id rate=i %}">
+        <span class="fa fa-star" href="{% url 'add_rating' rate=i id=b.id  %}"></span>
+        </a>
+        {% endif %}
+    {% endfor %}
+     {{ b.rate }}
 
-        {% endfor %}
-<br><br>
+    <br><br>
+    {% for comment in b.comments.all %}
+    <h4>{{ comment.text }}</h4>
+    <h5>{{ comment.date }}</h5>
+    <h6>{{ comment.author }} </h6>
+    <a href="{% url 'comment_like' id=comment.id %}"><h5>Likes: {{ comment.count_like }}</h5></a>
 
-{% endfor %}
+    {% endfor %}
+    <br><br>
+
+    {% endfor %}
+</div>
 </body>
 </html>
