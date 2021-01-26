@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BOOKSHOP</title>
+    <title> {{ genre }} </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style> .checked {color: orange;} </style>
 </head>
 <body>
 <div class="container">
 <h3>{{ user }}</h3>
-<a href = "{% url 'genre_page' genre='Adventure' %}"> Adventure </a>
 {% for b in books %}
-    <a href="{% url 'book-detail-page' slug=b.slug %}"><h1>{{ b.title }}</h1></a>
+    <a href="{% url 'book-detail-page' id=b.id %}"><h1>{{ b.title }}</h1></a>
     <h4> {{ b.description}} </h4>
     <h2>{{ b.date }}</h2>
     <h4> authors: </h4>
@@ -21,21 +19,27 @@
             {% endfor %}
     {% for i in range %}
         {% if b.rate >= i %}
-        <a href="{% url 'add_rating' slug=b.slug rate=i %}">
+        <a href="{% url 'add_rating' id=b.id rate=i %}">
         <span class="fa fa-star checked"></span>
         </a>
         {% else %}
-        <a href="{% url 'add_rating' slug=b.slug rate=i  %}">
-        <span class="fa fa-star" href="{% url 'add_rating' rate=i slug=b.slug %}"></span>
+        <a href="{% url 'add_rating' id=b.id rate=i  %}">
+        <span class="fa fa-star" href="{% url 'add_rating' rate=i id=b.id %}"></span>
         </a>
         {% endif %}
     {% endfor %}
      {{ b.rate }}
 
-
     <br><br>
+    {% for comment in b.comments.all %}
+    <h4>{{ comment.comment }}</h4>
+    <h5>{{ comment.date }}</h5>
+    <h6>{{ comment.author }} </h6>
+    <a href="{% url 'comment_like' id=comment.id %}"><h5>Likes: {{ comment.count_like }}</h5></a>
 
     {% endfor %}
+    <br><br>
+{% endfor %}
 </div>
 </body>
 </html>

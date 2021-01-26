@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb">
-        <schema name="main" object-types="table, dataset trigger, constraint, index, column, view" />
+        <schema name="main" object-types="table, index, column, dataset trigger, view, constraint" />
       </connection>
     </loaded-nodes>
   </component>
@@ -120,7 +120,7 @@
           <session-management value="true" />
           <ddl-file-binding value="true" />
           <database-logging value="false" />
-          <connect-automatically value="true" />
+          <connect-automatically value="false" />
           <restore-workspace value="true" />
           <restore-workspace-deep value="true" />
           <environment-type value="default" />

@@ -9,6 +9,8 @@ class CommentAdmin(admin.StackedInline):
 
 class BookAdmin(admin.ModelAdmin):
     inlines = [CommentAdmin]
-
+    readonly_fields = ['rate']
+    exclude = ['users_counted_stars', 'count_users']
+    prepopulated_fields = {"slug": ('title',)}
 
 admin.site.register(Book, BookAdmin)

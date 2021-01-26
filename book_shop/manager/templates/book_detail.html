@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book.title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style> .checked {color: orange;} </style>
+</head>
+<body>
+<div class="container">
+<h2>{{ book.title }}</h2>
+<h4>{{ book.description }}</h4>
+<h4>{{ book.genre }}</h4>
+<h3> Authors: </h3>
+{% for author in book.authors.all %}
+<span> {{ author }} </span>
+{% endfor %}
+<br><br>
+
+    {% for i in range %}
+        {% if book.rate >= i %}
+        <a href="{% url 'add_rating_location' slug=book.slug rate=i  location=1 %}">
+        <span class="fa fa-star checked"></span>
+        </a>
+        {% else %}
+        <a href="{% url 'add_rating_location' slug=book.slug rate=i location=1 %}">
+        <span class="fa fa-star"></span>
+        </a>
+        {% endif %}
+    {% endfor %}
+     {{ book.rate }}
+
+{% for comment in book.comments.all %}
+<h3>{{ comment.comment }}</h3>
+<h3>{{ comment.date }}</h3>
+<h3>{{ comment.author }}</h3>
+<a href="{% url 'comment_like_location' id=comment.id slug=comment.book.slug %}"><h5>Likes: {{ comment.users_like.count }}</h5></a>
+{% endfor %}
+</div>
+</body>
+</html>
