@@ -5,7 +5,7 @@ from slugify import slugify
 
 class Book(models.Model):
     title = models.CharField(max_length=250)
-    date = models.DateTimeField(verbose_name='date-time', auto_now=False)
+    date = models.DateTimeField(verbose_name='date-time', auto_now=False, null=True)
     authors = models.ManyToManyField(User, related_name='books')
     description = models.TextField(verbose_name='описание', null=True)
     likes = models.PositiveIntegerField(default=0)
@@ -24,7 +24,7 @@ class Book(models.Model):
         try:
             super().save(**kwargs)
         except:
-            self.sug += str(self.id)
+            self.slug += str(self.id)
             super().save(**kwargs)
 
 
@@ -81,3 +81,6 @@ class UsersRating(models.Model):
         self.book.users_counted_stars += self.rate
         self.book.rate = self.book.users_counted_stars / self.book.count_users
         self.book.save()
+
+
+

@@ -10,7 +10,7 @@
 <div class="container">
 <h3>{{ user }}</h3>
 {% for b in books %}
-    <a href="{% url 'book-detail-page' id=b.id %}"><h1>{{ b.title }}</h1></a>
+    <a href="{% url 'book-detail-page' slug=b.slug %}"><h1>{{ b.title }}</h1></a>
     <h4> {{ b.description}} </h4>
     <h2>{{ b.date }}</h2>
     <h4> authors: </h4>
@@ -19,12 +19,12 @@
             {% endfor %}
     {% for i in range %}
         {% if b.rate >= i %}
-        <a href="{% url 'add_rating' id=b.id rate=i %}">
+        <a href="{% url 'add_rating' slug=b.slug rate=i %}">
         <span class="fa fa-star checked"></span>
         </a>
         {% else %}
-        <a href="{% url 'add_rating' id=b.id rate=i  %}">
-        <span class="fa fa-star" href="{% url 'add_rating' rate=i id=b.id %}"></span>
+        <a href="{% url 'add_rating' slug=b.slug rate=i  %}">
+        <span class="fa fa-star" href="{% url 'add_rating' rate=i slug=b.slug %}"></span>
         </a>
         {% endif %}
     {% endfor %}

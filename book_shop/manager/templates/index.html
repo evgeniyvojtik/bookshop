@@ -10,6 +10,9 @@
 <body>
 <div class="container">
 <h3>{{ user }}</h3>
+{% if not request.user.is_authenticated %}
+<a href="{% url 'login' %}"> Login </a>
+{% endif %}
 <a href = "{% url 'genre_page' genre='Adventure' %}"> Adventure </a>
 {% for b in books %}
     <a href="{% url 'book-detail-page' slug=b.slug %}"><h1>{{ b.title }}</h1></a>
@@ -32,10 +35,17 @@
     {% endfor %}
      {{ b.rate }}
 
+    <br>
+{% endfor %}
+{% if user.is_authenticated %}
+<form action="{% url 'add_book' %}" method="post">
+ {% csrf_token %}
+ {{ form }}
+    <input type="submit" name="Отправить" value="OK">
+</form>
+{% endif %}
 
-    <br><br>
-
-    {% endfor %}
 </div>
+
 </body>
 </html>

@@ -37,6 +37,8 @@
 <h3>{{ comment.author }}</h3>
 <a href="{% url 'comment_like_location' id=comment.id slug=comment.book.slug %}"><h5>Likes: {{ comment.users_like.count }}</h5></a>
 {% endfor %}
+
+
 </div>
 </body>
 </html>
