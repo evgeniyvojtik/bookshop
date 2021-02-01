@@ -1,9 +1,11 @@
+from django.contrib.auth import login, logout
 from django.db.models import Count, Prefetch
 from django.shortcuts import render, redirect
 from django.views import View
-from manager.forms import BookForm
+from manager.forms import BookForm, CustomAuthenticationForm
 from manager.models import Book, Comment, LikeCommentUser, UsersRating
 from django.contrib.auth.forms import AuthenticationForm
+
 
 class MyPage(View):
 
@@ -15,7 +17,6 @@ class MyPage(View):
         context['books'] = books
         context['range'] = range(1, 6)
         context['form'] = BookForm()
-        #context['login_form'] = AuthenticationForm()
         return render(request, 'index.html', context)
 
 
@@ -46,7 +47,6 @@ class BookDetail(View):
         comments = Prefetch('comments', comment_query)
         context['book'] = Book.objects.prefetch_related('authors', comments).get(slug=slug)
         context['range'] = range(1, 6)
-       # context['comment_form'] = CommentForm()
         return render(request, 'book_detail.html', context)
 
 
@@ -82,5 +82,14 @@ class AddBook(View):
 
 class LoginView(View):
     def get(self, request):
-        return render(request, 'login.html', {'form': AuthenticationForm()})
+        return render(request, 'login.html', {'form': CustomAuthenticationForm()})
 
+    def post(self, request):
+        user = CustomAuthenticationForm(data=request.POST)
+        if user.is_valid():
+            login(request, user.get_user())
+        return redirect('the-main-page')
+
+def logout_user(request):
+    logout(request)
+    return redirect('the-main-page')
