@@ -21,7 +21,8 @@ class CustomAuthenticationForm(AuthenticationForm):
         widget=PasswordInput(attrs={'autocomplete': 'current-password', 'class': 'form-control'}),
     )
 
-# class CommentForm(ModelForm):
-#     class Meta:
-#         model = Comment
-#         fields = ['comment', 'author']
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['comment']

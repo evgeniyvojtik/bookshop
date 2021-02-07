@@ -9,6 +9,7 @@
 </head>
 <body>
 <div class="container">
+<a href="{% url 'to_main_page' %}">На главную страницу</a>
 <h2>{{ book.title }}</h2>
 <h4>{{ book.description }}</h4>
 <h4>{{ book.genre }}</h4>
@@ -37,7 +38,13 @@
 <h3>{{ comment.author }}</h3>
 <a href="{% url 'comment_like_location' id=comment.id slug=comment.book.slug %}"><h5>Likes: {{ comment.users_like.count }}</h5></a>
 {% endfor %}
-
+{% if request.user.is_authenticated %}
+<form action="{% url 'add_comment' slug=book.slug %}" method="post">
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="submit" value="Оставить комментарий">
+</form>
+{% endif %}
 
 </div>
 </body>

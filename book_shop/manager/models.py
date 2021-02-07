@@ -42,6 +42,7 @@ class Comment(models.Model):
         through='manager.LikeCommentUser',
         related_name='liked_comment'
     )
+    tmp_book = models.ForeignKey("TMPBook", on_delete=models.CASCADE, related_name='tmp_comment', null= True)
 
 
 class LikeCommentUser(models.Model):
@@ -66,6 +67,7 @@ class UsersRating(models.Model):
     book: Book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='users_rate')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='books_rate')
     rate = models.PositiveIntegerField(verbose_name='rating')
+    tmp_book = models.ForeignKey("TMPBook", on_delete=models.CASCADE, related_name='users_rate', null=True)
 
     def save(self, **kwargs):
         try:
@@ -83,4 +85,28 @@ class UsersRating(models.Model):
         self.book.save()
 
 
+class TMPBook(models.Model):
+    title = models.CharField(max_length=250)
+    date = models.DateTimeField(verbose_name='date-time', auto_now=False, null=True)
+    authors = models.ManyToManyField(User, related_name='books_tmp')
+    description = models.TextField(verbose_name='описание', null=True)
+    likes = models.PositiveIntegerField(default=0)
+    genres = models.CharField(max_length=50, verbose_name='жанр', null=True)
+    rate = models.DecimalField(max_digits=3, decimal_places=2, default=0.0)
+    users_counted_stars = models.PositiveIntegerField(default=0, verbose_name='counted_stars')
+    count_users = models.PositiveIntegerField(default=0, verbose_name='counted_users')
+    slug = models.SlugField(primary_key=True)
+    # uuid = models.UUIDField()
+
+    def __str__(self):
+        return f"{self.title}....... {self.id}"
+
+    # def save(self, **kwargs):
+    #     if self.id is None:
+    #         self.slug = slugify(self.title)
+    #     try:
+    #         super().save(**kwargs)
+    #     except:
+    #         self.slug += str(self.id)
+    #         super().save(**kwargs)
 

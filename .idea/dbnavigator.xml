@@ -24,7 +24,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb">
+        <schema name="main" object-types="constraint, table, index, column, view, dataset trigger" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb">
@@ -45,6 +49,7 @@
     <filter-actions connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" dataset="main.manager_comment" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" dataset="main.manager_book" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" dataset="main.manager_book_authors" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" dataset="main.manager_tmpbook" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="e0e4fb00-de8e-4129-b3ed-84667f24a1cb" dataset="main.manager_testtable" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
